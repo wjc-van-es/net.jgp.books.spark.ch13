@@ -9,74 +9,84 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-    <scala.version>2.12</scala.version>
-    <spark.version>3.1.2</spark.version>
-    <junit.version>4.13.1</junit.version>
-    <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <scala.version>2.13</scala.version>
+        <spark.version>4.0.0</spark.version>
+        <spark-xml.version>0.18.0</spark-xml.version>
+        <junit.version>5.13.4</junit.version>
+        <java.se.version>21</java.se.version>
+        <maven.compiler.release>${java.se.version}</maven.compiler.release>
+        <maven.compile.source>${java.se.version}</maven.compile.source>
+        <maven.compile.target>${java.se.version}</maven.compile.target>
+        <mvn.plugins.compiler.version>3.14.0</mvn.plugins.compiler.version>
+        <mvn.plugins.jar.version>3.4.2</mvn.plugins.jar.version>
+        <!--<versions-maven-plugin.version>2.5</versions-maven-plugin.version>-->
+        <!--<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>-->
+        <slf4j.version>2.0.17</slf4j.version>
+        <log4j2.version>2.25.1</log4j2.version>
 
-    <!-- Only used for lab #910 -->
-    <postgresql.version>42.1.4</postgresql.version>
-  </properties>
+        <!-- Only used for lab #910 -->
+        <postgresql.version>42.1.4</postgresql.version>
+    </properties>
 
-  <dependencies>
-    <!-- Spark -->
-    <dependency>
-      <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_${scala.version}</artifactId>
-      <version>${spark.version}</version>
-    </dependency>
+    <dependencies>
+        <!-- Spark -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_${scala.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
 
-    <dependency>
-      <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_${scala.version}</artifactId>
-      <version>${spark.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-simple</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${scala.version}</artifactId>
+            <version>${spark.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
-    <dependency>
-      <groupId>org.apache.spark</groupId>
-      <artifactId>spark-mllib_${scala.version}</artifactId>
-      <version>${spark.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-log4j12</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-simple</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+        <dependency>
+          <groupId>org.apache.spark</groupId>
+          <artifactId>spark-mllib_${scala.version}</artifactId>
+          <version>${spark.version}</version>
+          <exclusions>
+            <exclusion>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-log4j12</artifactId>
+            </exclusion>
+            <exclusion>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-simple</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
 
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-  <!-- Build -->
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven-compiler-plugin.version}</version>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+               <!-- <version>${maven-compiler-plugin.version}</version>-->
+                <configuration>
+                    <compilerVersion>${maven.compiler.release}</compilerVersion>
+                    <release>${java.se.version}</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
 </project>
